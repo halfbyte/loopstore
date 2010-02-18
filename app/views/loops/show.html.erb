@@ -1,0 +1,23 @@
+<p>
+  <b>Name:</b>
+  <%=h @loop.name %>
+</p>
+
+<p>
+  <b>Data:</b>
+  <%=h @loop.data %>
+</p>
+
+<p>
+  <b>Public:</b>
+  <%=h @loop.public %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%=h @loop.user_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_loop_path(@loop) %> |
+<%= link_to 'Back', loops_path %>
