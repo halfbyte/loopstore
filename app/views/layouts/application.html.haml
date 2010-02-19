@@ -10,6 +10,11 @@
     #container
       #header
         %h1 (nano)loop store
+        %ul.menu
+          %li= link_to "Home", root_path
+          -if signed_in?
+
+
       #content
         #flash
           - flash.each do |key, value|
@@ -20,4 +25,14 @@
       #sidebar
         = yield :sidebar
       #footer
-        
+        &copy; jan krutisch / mindmatters GmbH & Co. KG
+        \|
+        = link_to "Imprint / Impressum", imprint_path
+        \|
+        - if signed_in?
+          = link_to "Sign Out", sign_out_path, :method => :delete
+        - else
+          = link_to "Sign Up", sign_up_path
+          /
+          = link_to "Login", sign_in_path
+

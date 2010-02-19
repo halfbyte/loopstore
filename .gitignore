@@ -3,3 +3,4 @@ db/*.sqlite3
 tmp/**/*
 public/stylesheets/compiled/*
 log/*.log
+vendor/gems

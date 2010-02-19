@@ -27,7 +27,8 @@ ActiveRecord::Schema.define(:version => 20100218224044) do
     t.string   "confirmation_token", :limit => 128
     t.string   "remember_token",     :limit => 128
     t.boolean  "email_confirmed",                   :default => false, :null => false
-    t.string   "mail_drop"
+    t.string   "mail_drop_public"
+    t.string   "mail_drop_private"
     t.string   "role"
     t.datetime "created_at"
     t.datetime "updated_at"
