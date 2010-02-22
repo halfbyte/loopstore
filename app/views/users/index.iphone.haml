@@ -1,0 +1,7 @@
+- content_for :title do
+  All Artists
+
+%ul.rounded
+  - @users.each do |user|
+    %li.arrow
+      = link_to user.email, user_loops_path(user)

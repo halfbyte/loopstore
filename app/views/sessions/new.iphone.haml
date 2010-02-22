@@ -1,0 +1,8 @@
+- content_for :title do
+  Log in
+
+-form_for :session, :url => session_path do |f|
+  %ul.edit.rounded
+    %li= f.text_field :email, :placeholder => 'Email'
+    %li= f.password_field :password, :placeholder => 'Password'
+  = link_to "Log in",nil, :class => 'whiteButton submit'

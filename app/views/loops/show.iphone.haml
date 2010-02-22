@@ -1,0 +1,11 @@
+- content_for :title do
+  &= "Loop: " + @loop.name
+
+- if @user == current_user
+  %p
+    by
+    &= @looop.user.email
+%ul.individual
+  %li= link_to "Download", nanoloop_url(@loop), :rel => 'external'
+  - if @loop.user == current_user
+    %li= link_to "Edit Details", edit_loop_path(@loop)

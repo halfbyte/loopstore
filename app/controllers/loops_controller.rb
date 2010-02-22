@@ -1,7 +1,8 @@
 class LoopsController < ApplicationController
   before_filter :authenticate, :only => :destroy
   before_filter :load_user_or_deny
-  
+
+
   # GET /loops
   # GET /loops.xml
   def index
@@ -9,6 +10,7 @@ class LoopsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
+      format.iphone
       format.xml  { render :xml => @loops }
     end
   end
@@ -20,17 +22,7 @@ class LoopsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @loop }
-    end
-  end
-
-  # GET /loops/new
-  # GET /loops/new.xml
-  def new
-    @loop = Loop.new
-
-    respond_to do |format|
-      format.html # new.html.erb
+      format.iphone
       format.xml  { render :xml => @loop }
     end
   end
@@ -38,23 +30,6 @@ class LoopsController < ApplicationController
   # GET /loops/1/edit
   def edit
     @loop = @user.loops.find(params[:id])
-  end
-
-  # POST /loops
-  # POST /loops.xml
-  def create
-    @loop = Loop.new(params[:loop])
-
-    respond_to do |format|
-      if @loop.save
-        flash[:notice] = 'Loop was successfully created.'
-        format.html { redirect_to(@loop) }
-        format.xml  { render :xml => @loop, :status => :created, :location => @loop }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @loop.errors, :status => :unprocessable_entity }
-      end
-    end
   end
 
   # PUT /loops/1
@@ -66,6 +41,7 @@ class LoopsController < ApplicationController
       if @loop.update_attributes(params[:loop])
         flash[:notice] = 'Loop was successfully updated.'
         format.html { redirect_to(@loop) }
+        format.iphone { redirect_to(@loop)}
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -82,13 +58,14 @@ class LoopsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to(loops_url) }
+      format.iphone { redirect_to(loops_url)}
       format.xml  { head :ok }
     end
   end
-  
+
 private
   def load_user_or_deny
-    if (params[:user_id]) 
+    if (params[:user_id])
       @user = User.find(params[:user_id])
     elsif(signed_in?)
       @user = current_user
@@ -96,5 +73,5 @@ private
       deny_access
     end
   end
-  
+
 end

@@ -5,7 +5,29 @@ class ApplicationController < ActionController::Base
   include Clearance::Authentication
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
+  before_filter :set_iphone_view
 
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
+
+
+  def login_required
+    authenticate
+  end
+
+
+protected
+
+  def set_iphone_view
+    if iphone_request?
+      request.format = :iphone
+    end
+  end
+
+  def iphone_request?
+    (agent = request.env["HTTP_USER_AGENT"]) && agent[/(Mobile\/.+Safari)/]
+  end
+
+
+
 end
