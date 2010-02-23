@@ -1,7 +1,14 @@
 class User < ActiveRecord::Base
   include Clearance::User
-  after_create :regenerate_emails
+  after_create :ensure_maildrops
   has_many :loops
+
+  def ensure_maildrops
+    if (mail_drop_public.blank? || mail_drop_private.blank?)
+      regenerate_emails
+    end
+    true
+  end
 
   def regenerate_emails
     self.update_attributes(:mail_drop_public => new_maildrop, :mail_drop_private => new_maildrop)
