@@ -45,18 +45,25 @@ body.three-col
     // true means it's the last column in the row
     +column(!content_columns)
 
+    h2, h3
+      :border
+        :bottom 1px solid black
+        :right 1px solid black
+      +single-corner-border-radius(bottom, right, 10px)
+
 #header
-  background: transparent url(/images/nanoloop_bg.png) top left repeat-x
+  background: transparent url(/images/nanolooploopbg.jpg) top left repeat-x
   margin: 20px 0 20px 0
   +box-shadow(0,4px,4px,#ccc)
   +single-corner-border-radius(top, right, 20px)
 
   h1
-    color: #000
+    color: #fff
     padding: 10px 10px 0px 10px
     margin: 0
     font-size: 2em
   p
+    color: #ccf
     padding: 10px
     margin: 0
 
