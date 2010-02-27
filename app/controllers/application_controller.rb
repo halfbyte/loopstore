@@ -12,15 +12,15 @@ class ApplicationController < ActionController::Base
   # filter_parameter_logging :password
 
 
+
+
+protected
   def login_required
     authenticate
   end
-
   def maildrop(user, priv)
     "loopstore+#{user.id}#{priv ? "P" : "p"}#{priv ? user.mail_drop_private : user.mail_drop_public}@googlemail.com"
   end
-
-protected
 
   def set_iphone_view
     if iphone_request?

@@ -1,10 +1,10 @@
 ActionController::Routing::Routes.draw do |map|
 
-  map.resources :loops, :only => [:show, :index, :destroy, :edit, :update]
+  map.resources :loops, :only => [:show, :index, :destroy, :edit, :update], :collection => {:latest => :get, :top => :get}
 
   map.resources :loops, :only => [:show, :index], :path_prefix => "users/:user_id", :name_prefix => 'user_'
 
-  map.resources :users, :only => [:create, :new, :index, :show]
+  map.resources :users, :only => [:create, :new, :index, :show, :edit, :update]
 
   Clearance::Routes.draw(map)
   # The priority is based upon order of creation: first created -> highest priority.

@@ -21,8 +21,23 @@ class UsersController < Clearance::UsersController
         logger.debug card.to_s
         render :text => card.to_s, :type => 'text/x-vcard'
       end
-
+      f.html
     end
+  end
+
+  def edit
+    @user = current_user
+  end
+
+  def update
+    @user = current_user
+    if @user.update_attributes(params[:user])
+      flash[:notice] = "Saved your settings..."
+      redirect_to root_path
+    else
+      render 'edit'
+    end
+
   end
 
   def index

@@ -3,6 +3,10 @@ class User < ActiveRecord::Base
   after_create :ensure_maildrops
   has_many :loops
 
+  validates_presence_of :nickname
+  validates_uniqueness_of :nickname
+
+
   def ensure_maildrops
     if (mail_drop_public.blank? || mail_drop_private.blank?)
       regenerate_emails

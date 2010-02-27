@@ -4,3 +4,7 @@ tmp/**/*
 public/stylesheets/compiled/*
 log/*.log
 vendor/gems
+public/system
+config/getmail_rc
+config/oldmail*
+data/maildir

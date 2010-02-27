@@ -1,12 +1,15 @@
 class LoopsController < ApplicationController
   before_filter :authenticate, :only => :destroy
-  before_filter :load_user_or_deny
-
+  before_filter :load_user_or_deny, :except => [:latest, :top]
 
   # GET /loops
   # GET /loops.xml
   def index
-    @loops = @user.loops.all
+    if (current_user == @user)
+      @loops = @user.loops.all
+    else
+      @loops = @user.loops.public.all
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -61,6 +64,18 @@ class LoopsController < ApplicationController
       format.iphone { redirect_to(loops_url)}
       format.xml  { head :ok }
     end
+  end
+
+# some exclusive iphone lists
+
+  def latest
+    @loops = Loop.latest
+    render 'list'
+  end
+
+  def top
+    @loops = Loop.latest
+    render 'list'
   end
 
 private

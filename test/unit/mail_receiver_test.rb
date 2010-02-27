@@ -12,6 +12,18 @@ class MailReceiverTest < ActionMailer::TestCase
         MailReceiver.receive(mail_fixture("nanoloop"))
       end
     end
+
+    should "save message_id to allow for better cueing" do
+      loop = MailReceiver.receive(mail_fixture("nanoloop"))
+      assert_not_nil loop.message_id, "message_id should not be empty"
+    end
+
+    should "save loop, even if no user has been found in the database" do
+      assert_difference "Loop.count" do
+        MailReceiver.receive(mail_fixture("nanoloop_with_wrong_mail"))
+      end
+    end
+
   end
 
 end

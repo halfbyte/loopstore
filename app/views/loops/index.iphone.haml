@@ -2,7 +2,7 @@
   - if @user == current_user
     Your loops
   - else
-    &= @user.email
+    &= @user.try(:nickname)
 - content_for :toolbar do
   = link_to 'Back', root_path, :class => 'back'
 %ul.rounded

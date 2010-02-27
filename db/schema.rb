@@ -9,26 +9,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100222140320) do
-
-  create_table "consumer_tokens", :force => true do |t|
-    t.integer  "user_id"
-    t.string   "type",       :limit => 30
-    t.string   "token",      :limit => 1024
-    t.string   "secret"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "consumer_tokens", ["token"], :name => "index_consumer_tokens_on_token", :unique => true
+ActiveRecord::Schema.define(:version => 20100227201133) do
 
   create_table "loops", :force => true do |t|
     t.string   "name"
-    t.text     "data"
     t.boolean  "public"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "nan_file_name"
+    t.string   "nan_content_type"
+    t.integer  "nan_file_size"
+    t.datetime "nan_updated_at"
+    t.string   "message_id"
   end
 
   create_table "users", :force => true do |t|
@@ -43,6 +36,8 @@ ActiveRecord::Schema.define(:version => 20100222140320) do
     t.string   "role"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "nickname"
+    t.text     "description"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"
